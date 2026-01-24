@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.educonnect">
+
+    <!-- 🌐 Internet Access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 📁 Optional: Local File Access (for old Android versions only) -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:name=".EduConnectApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="EConnect"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EduConnect"
+        tools:targetApi="34">
+
+        <!-- 🚀 Splash Screen (Entry Point) -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.EduConnect.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 🔐 Authentication -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+
+        <!-- 🧭 Dashboards -->
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".StudentDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+
+        <!-- 📂 Core Features -->
+        <activity android:name=".ProfileActivity" android:exported="false" />
+        <activity android:name=".ChatActivity" android:exported="false" />
+        <activity android:name=".AnnouncementsActivity" android:exported="false" />
+        <activity android:name=".RemindersActivity" android:exported="false" />
+        <activity android:name=".QuestionPapersActivity" android:exported="false" />
+        <activity android:name=".StudyMaterialActivity" android:exported="false" />
+        <activity android:name=".TimetableActivity" android:exported="false" />
+
+        <!-- 🧩 Quiz Feature -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:label="AI Quiz Generator"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".ViewQuizActivity"
+            android:exported="false"
+            android:label="Available Quizzes"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+
+        <!-- 👥 Groups -->
+        <activity android:name=".JoinGroupActivity" android:exported="false" />
+        <activity android:name=".CreateGroupActivity" android:exported="false" />
+        <activity android:name=".ViewGroupsActivity" android:exported="false" />
+        <activity android:name=".ViewMembersActivity" android:exported="false" />
+
+        <!-- 📢 Announcements -->
+        <activity android:name=".AddAnnouncementActivity" android:exported="false" />
+
+        <!-- 🤖 AI Assistant -->
+        <activity
+            android:name=".AIQueryActivity"
+            android:exported="false"
+            android:label="AI Assistant"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+
+        <!-- 📚 Upload & View -->
+        <activity
+            android:name=".UploadMaterialActivity"
+            android:exported="false"
+            android:label="Upload Content"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".ViewActivity"
+            android:exported="false"
+            android:label="View Content"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".ResultHistoryActivity"
+            android:exported="false"
+            android:label="Result History"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+        <activity
+            android:name=".AttemptQuizActivity"
+            android:exported="false"
+            android:label="Attempt Quiz"
+            android:theme="@style/Theme.EduConnect.NoActionBar" />
+
+
+    </application>
+
+</manifest>

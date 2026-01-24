@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M54,0A54,54 0 1,1 0,54A54,54 0 0,1 54,0z" />
+
+    <!-- Inner Circle -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M54,18A36,36 0 1,1 18,54A36,36 0 0,1 54,18z" />
+
+    <!-- Connection Lines -->
+    <path
+        android:strokeColor="#BBDEFB"
+        android:strokeWidth="3"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M30,50 L54,30 L78,50 L54,70Z" />
+
+    <!-- Book Shape (symbolizing education) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,55h10v10h-10zM60,55h10v10h-10z" />
+
+    <!-- Connecting Dots -->
+    <path
+        android:fillColor="#00BCD4"
+        android:pathData="M53,28a3,3 0 1,1 0,6a3,3 0 1,1 0,-6zM29,49a3,3 0 1,1 0,6a3,3 0 1,1 0,-6zM77,49a3,3 0 1,1 0,6a3,3 0 1,1 0,-6zM53,68a3,3 0 1,1 0,6a3,3 0 1,1 0,-6z" />
+
+</vector>

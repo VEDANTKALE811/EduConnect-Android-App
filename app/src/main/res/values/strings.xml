@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">EduConnect</string>
+
+    <string name="login_title">Welcome Back</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="login_signup_link">Don\'t have an account? Sign Up</string>
+
+    <string name="error_email_required">Email is required</string>
+    <string name="error_password_required">Password is required</string>
+
+    <string name="login_success">Login successful!</string>
+    <string name="login_failed">Login failed: %1$s</string>
+    <string name="join_icon">Join Icon</string>
+    <string name="create_group_icon">Create Group Icon</string>
+
+        <string name="upload_title">📤 Upload</string>
+        <string name="material_title">Material Title</string>
+        <string name="description">Description</string>
+        <string name="google_drive_link">Google Drive Link</string>
+        <string name="upload">Upload</string>
+
+
+</resources>

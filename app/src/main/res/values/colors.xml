@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="purple_500">#6200EE</color>
+    <color name="primary_blue">#3F51B5</color>
+    <color name="background_light">#F9FAFB</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="login_gradient_start">#1A237E</color>
+    <color name="login_gradient_end">@color/primary_blue</color> <color name="button_gradient_start">#FFC107</color>
+    <color name="button_gradient_end">#FF9800</color>
+    <color name="accent_amber">#FF6F00</color>
+    <color name="red">#E53935</color>
+    <color name="gray">#888888</color>
+    <color name="dark_gray">#555555</color>
+    <color name="light_gray">#F2F2F2</color>
+    <!-- Teal colors -->
+    <color name="gray_light">#BDBDBD</color>
+
+    <color name="teal_700">#00796B</color> <!-- Dark Teal -->
+    <color name="teal_500">#009688</color> <!-- Normal Teal -->
+    <color name="teal_200">#80CBC4</color> <!-- Light Teal -->
+    <color name="primary">#3F51B5</color>
+    <color name="primaryDark">#303F9F</color>
+    <color name="accent">#FF4081</color>
+    <color name="primaryColor">#3F51B5</color>
+
+    <color name="chat_bg">#F4F6F9</color>
+    <color name="toolbar_gradient_start">#3949AB</color>
+    <color name="toolbar_gradient_end">#5C6BC0</color>
+
+        <!-- Primary EduConnect theme colors -->
+        <color name="purple_200">#BB86FC</color>
+
+        <color name="purple_700">#3700B3</color>
+
+        <color name="gradient_start">#7F00FF</color>
+        <color name="gradient_end">#E100FF</color>
+
+    <color name="gray_dark">#616161</color>
+    <color name="purple_300">#BA68C8</color>
+
+</resources>
