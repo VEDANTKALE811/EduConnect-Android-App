@@ -45,6 +45,20 @@ Students access learning materials, quizzes, announcements, and group discussion
 - Reminders & Notifications
 - Profile Management
 - Timetable View
+## 📸 Application Screenshots
+
+### Admin Panel
+![Admin Dashboard 1](screenshots/AdminDash1.jpeg)
+![Admin Dashboard 2](screenshots/AdminDash2.jpeg)
+![Admin Sign Up](screenshots/AdminSignUp.jpeg)
+
+### Student Panel
+![Student Dashboard 1](screenshots/StudentDash1.jpeg)
+![Student Dashboard 2](screenshots/StudentDash2.jpeg)
+![Student Sign Up](screenshots/StudentSignUp.jpeg)
+
+### Common
+![App Logo](screenshots/appLogo.jpeg)
 
 ---
 
