@@ -145,6 +145,14 @@
                 android:textSize="15sp"
                 android:background="@drawable/bg_btn_gradient"
                 app:cornerRadius="26dp"/>
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/login_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"/>
 
             <!-- Trust text -->
             <TextView

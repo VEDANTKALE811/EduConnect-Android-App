@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // Views (MATCH NEW XML)
+    // Views
     private TextInputEditText etEmail, etPassword;
     private MaterialButton btnLogin;
     private TextView tvSignUpLink, tvForgotPassword, tvHero;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // Firebase
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,11 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        // Firebase
+        // Firebase init
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        // Init views
+        // View init
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -72,9 +75,11 @@ public class LoginActivity extends AppCompatActivity {
 
         // Click listeners
         btnLogin.setOnClickListener(v -> loginUser());
+
         tvSignUpLink.setOnClickListener(v ->
                 startActivity(new Intent(this, SignUpActivity.class))
         );
+
         tvForgotPassword.setOnClickListener(v -> showForgotPasswordDialog());
     }
 
@@ -82,62 +87,94 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
+        // Email validation
         if (TextUtils.isEmpty(email)) {
             etEmail.setError("Email required");
+            etEmail.requestFocus();
             return;
         }
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Enter valid email");
+            etEmail.requestFocus();
+            return;
+        }
+
+        // Password validation
         if (TextUtils.isEmpty(password)) {
             etPassword.setError("Password required");
+            etPassword.requestFocus();
+            return;
+        }
+
+        if (password.length() < 8) {
+            etPassword.setError("Minimum 8 characters");
+            etPassword.requestFocus();
             return;
         }
 
         setLoading(true);
 
+        // Firebase Auth
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    setLoading(false);
-
                     if (task.isSuccessful()) {
-                        String uid = mAuth.getCurrentUser().getUid();
-
-                        FirebaseFirestore.getInstance()
-                                .collection("users")
-                                .document(uid)
-                                .get()
-                                .addOnSuccessListener(doc -> {
-                                    if (doc.exists()) {
-                                        String role = doc.getString("role");
-
-                                        if ("admin".equalsIgnoreCase(role)) {
-                                            startActivity(new Intent(this, AdminDashboardActivity.class));
-                                        } else {
-                                            startActivity(new Intent(this, StudentDashboardActivity.class));
-                                        }
-                                        finish();
-                                    } else {
-                                        Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        fetchUserRole();
                     } else {
-                        String msg;
-                        try {
-                            throw task.getException();
-                        } catch (FirebaseAuthInvalidUserException e) {
-                            msg = "No account found";
-                        } catch (FirebaseAuthInvalidCredentialsException e) {
-                            msg = "Incorrect password";
-                        } catch (Exception e) {
-                            msg = "Login failed";
-                        }
-                        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+                        setLoading(false);
+                        handleLoginError(task.getException());
                     }
                 });
+    }
+
+    private void fetchUserRole() {
+        String uid = mAuth.getCurrentUser().getUid();
+
+        db.collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(doc -> {
+                    setLoading(false);
+
+                    if (doc.exists()) {
+                        String role = doc.getString("role");
+
+                        if ("admin".equalsIgnoreCase(role)) {
+                            startActivity(new Intent(this, AdminDashboardActivity.class));
+                        } else {
+                            startActivity(new Intent(this, StudentDashboardActivity.class));
+                        }
+                        finish();
+                    } else {
+                        Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    Toast.makeText(this, "Failed to load user data", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void handleLoginError(Exception exception) {
+        String message;
+
+        try {
+            throw exception;
+        } catch (FirebaseAuthInvalidUserException e) {
+            message = "No account found with this email";
+        } catch (FirebaseAuthInvalidCredentialsException e) {
+            message = "Incorrect password";
+        } catch (Exception e) {
+            message = "Login failed. Try again";
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     private void setLoading(boolean loading) {
         progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
         btnLogin.setEnabled(!loading);
+        btnLogin.setText(loading ? "Logging in..." : "Log in →");
     }
 
     private void showForgotPasswordDialog() {
@@ -150,11 +187,24 @@ public class LoginActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Send", (d, w) -> {
             String email = input.getText().toString().trim();
-            if (!email.isEmpty()) {
-                mAuth.sendPasswordResetEmail(email)
-                        .addOnSuccessListener(a ->
-                                Toast.makeText(this, "Reset email sent", Toast.LENGTH_LONG).show());
+
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(this, "Email required", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Enter valid email", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.sendPasswordResetEmail(email)
+                    .addOnSuccessListener(a ->
+                            Toast.makeText(this, "Reset email sent", Toast.LENGTH_LONG).show()
+                    )
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this, "Failed to send reset email", Toast.LENGTH_SHORT).show()
+                    );
         });
 
         builder.setNegativeButton("Cancel", (d, w) -> d.dismiss());
