@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- 🌞 Main Light Theme -->
-    <style name="Theme.EduConnect" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary branding colors -->
+    <!-- 🌞 Main App Theme -->
+    <style name="Theme.EduConnect" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- 🎨 Brand Colors -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDark</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-        <!-- Backgrounds -->
+        <!-- 🖼 Backgrounds -->
         <item name="android:windowBackground">@color/background_light</item>
         <item name="colorSurface">@color/background_light</item>
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:statusBarColor">@color/primaryDark</item>
 
-        <!-- Text colors -->
+        <!-- 📱 System Bars -->
+        <item name="android:statusBarColor">@color/primaryDark</item>
+        <item name="android:navigationBarColor">@color/white</item>
+
+        <!-- 📝 Text -->
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:textColorSecondary">#444444</item>
 
-        <!-- 🚫 Disable auto dark mode -->
+        <!-- 🚫 Disable auto dark -->
         <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
 
     </style>
@@ -30,7 +33,7 @@
     </style>
 
     <!-- ✨ Splash Screen Theme -->
-    <style name="Theme.EduConnect.Splash" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.EduConnect.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_splash_modern</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
